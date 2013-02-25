@@ -4,11 +4,12 @@ import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.markup.html.link.Link;
 
 /**
- * User: jcarrasco,obesga
- * Date: 16-sep-2011
  * Link which changes the #hashtag of an URL
  * HTML code could be <a wicket:id="id">texto</a>
  * HTML code could be  &lt;a wicket:id="id"&gt;texto&lt;/a&gt;
+ *
+ * User: jcarrasco,obaisdefe
+ * Date: 16-sep-2011
  */
 public class AnchorAjaxLink extends Link {
 

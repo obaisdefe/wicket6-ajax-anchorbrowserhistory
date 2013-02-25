@@ -12,7 +12,11 @@ import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
 
 /**
- * User: obesga
+ * Behaviour that can be added to a page to recieve event from history token change
+ * Also, cand send token changes to page (with or without firing the event )
+ *
+ *
+ * User: obaisdefe
  * Date: 13-feb-2013
  */
 public abstract class HistoryAjaxBehaviour extends AbstractDefaultAjaxBehavior {
@@ -49,6 +53,7 @@ public abstract class HistoryAjaxBehaviour extends AbstractDefaultAjaxBehavior {
         target.appendJavaScript(sbjs.toString());
     }
 
+    // If initial token is launched back to this behaviour
     private boolean getTokenOnStartup = false;
 
     /**
@@ -75,19 +80,24 @@ public abstract class HistoryAjaxBehaviour extends AbstractDefaultAjaxBehavior {
         // Recover token value
         IRequestParameters requestParameters = RequestCycle.get().getRequest().getRequestParameters();
         org.apache.wicket.util.string.StringValue tokenParameterValue = requestParameters.getParameterValue(PARAM_TOKEN);
-        onTokenChanged(target, tokenParameterValue.toString());
+        String token = tokenParameterValue.toString();
+        onTokenChanged(target, token);
         //... if you want to send a wicket event, use it on abstract method
         //getComponent().send(getComponent().getPage(), Broadcast.BREADTH,new TokenChangedEvent(target, tokenParameterValue.toString()));
+        // - - - -
+        // ..or if you want to add data to the ajaxtargetrequest and use the same ajax event
+        // RequestCycle.get().setMetaData(new MetaDataKey<String>(),token);
+        //
     }
 
     /**
      * Method called when the token changes.
      *
      *
-     * @param target the {@link AjaxRequestTarget}
+     * @param ajaxRequestTarget the {@link AjaxRequestTarget}
      * @param token  the url token (can be empty)
      */
-    public abstract void onTokenChanged(AjaxRequestTarget target, String token);
+    public abstract void onTokenChanged(AjaxRequestTarget ajaxRequestTarget, String token);
 
 
     @Override

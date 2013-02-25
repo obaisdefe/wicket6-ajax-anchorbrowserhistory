@@ -4,12 +4,11 @@
 	<groupId>org.isdefe</groupId>
 	<artifactId>anchorbrowserhistory</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>anchorbrowserhistory</name>
 	<description>
         Pair of classes that helps to use browser history and anchor links (internal links) with Apache Wicket 6.x
         https://github.com/obaisdefe/wicket6-ajax-anchorbrowserhistory
-
     </description>
 	<organization>
 	    <name>Isdefe</name>
