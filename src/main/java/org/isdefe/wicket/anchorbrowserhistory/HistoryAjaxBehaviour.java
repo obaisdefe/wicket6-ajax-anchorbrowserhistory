@@ -45,12 +45,36 @@ public abstract class HistoryAjaxBehaviour extends AbstractDefaultAjaxBehavior {
      *                     when the token is changed
      */
     public static void changeToken(String token, AjaxRequestTarget target, boolean triggerEvent) {
+        target.appendJavaScript(getScript(token,triggerEvent));
+    }
+
+
+    /**
+     * Returns the javascript to execute a change of url tolen
+     * By default, it does not trigger the event
+     * @param token  the String to set the token to
+     * @return Javascript code
+     */
+    public static String getScript(String token) {
+        return getScript(token,false);
+    }
+
+    /**
+     * Returns the javascript to execute a change of url tolen
+     * By default, it does not trigger the event
+     * @param token  the String to set the token to
+     * @param triggerEvent set to false if you don't want the listeners to get the event
+     *                     when the token is changed
+     * @return Javascript code
+     */
+    public static String getScript(String token,  boolean triggerEvent) {
         StringBuilder sbjs = new StringBuilder();
         if (!triggerEvent) {
             sbjs.append("tokenManagerSkipEvent = true;\n");
         }
         sbjs.append("window.location.hash = '").append(JavaScriptUtils.escapeQuotes(token)).append("';\n");
-        target.appendJavaScript(sbjs.toString());
+        return sbjs.toString();
+
     }
 
     // If initial token is launched back to this behaviour
